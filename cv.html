@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<title>Peter Humphrey, designer and technologist</title>
+<meta charset="UTF-8">
+<meta property="og:title" content="Peter Humphrey, designer and technologist" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://peterhumphrey.com" />
+<meta property="og:image" content="#" />
+<meta property="og:description" content="Peter Humphrey is a NYC-based interactive designer and technologist." />
+<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+<!--[if IE]>
+<link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<![endif]-->
+<script type="text/javascript" src="javascripts/paper-full.js"></script>
+<script type="text/paperscript" canvas="canvas">
+// Adapted from the following Processing example:
+// http://processing.org/learning/topics/follow3.html
+
+// The amount of points in the path:
+var points = 20;
+
+// The distance between the points:
+var length = 50;
+
+var path = new Path({
+	strokeColor: '#fff',
+	strokeWidth: 20,
+	strokeCap: 'round'
+});
+
+var start = view.center / [10, 1];
+for (var i = 0; i < points; i++)
+	path.add(start + new Point(i * length, 0));
+
+function onMouseMove(event) {
+	path.firstSegment.point = event.point;
+	for (var i = 0; i < points - 1; i++) {
+		var segment = path.segments[i];
+		var nextSegment = segment.next;
+		var vector = segment.point - nextSegment.point;
+		vector.length = length;
+		nextSegment.point = segment.point - vector;
+	}
+	path.smooth();
+}
+
+function onMouseDown(event) {
+	path.fullySelected = true;
+	path.strokeColor = '#0099ff';
+}
+
+function onMouseUp(event) {
+	path.fullySelected = false;
+	path.strokeColor = '#fff';
+}
+</script>
+</head>
+<body id="mainpage">
+	<div class="cv-conatiner">
+		<div class="job">
+			<h1>NO2</h1>
+			<h3>Founding Partner</h3>
+			<h3>2015</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam debitis voluptatum libero sequi laborum veritatis quam voluptas quis odit, obcaecati nihil delectus impedit assumenda placeat illo magni officia similique sapiente!</p>
+		</div>
+		<div class="job">
+			<h1>Antarctic</h1>
+			<h3>Founding Partner, Digital Director</h3>
+			<h3>2013 - 2015</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam debitis voluptatum libero sequi laborum veritatis quam voluptas quis odit, obcaecati nihil delectus impedit assumenda placeat illo magni officia similique sapiente!</p>
+		</div>
+		<div class="job">
+			<h1>Imprint Projects</h1>
+			<h3>Producer</h3>
+			<h3>2013</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam debitis voluptatum libero sequi laborum veritatis quam voluptas quis odit, obcaecati nihil delectus impedit assumenda placeat illo magni officia similique sapiente!</p>
+		</div>
+		<div class="job">
+			<h1>Via Tribunali</h1>
+			<h3>Owner</h3>
+			<h3>2014</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam debitis voluptatum libero sequi laborum veritatis quam voluptas quis odit, obcaecati nihil delectus impedit assumenda placeat illo magni officia similique sapiente!</p>
+		</div>
+		<div class="job">
+			<h1>OAKNYC</h1>
+			<h3>eCommerce Producer</h3>
+			<h3>2012</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam debitis voluptatum libero sequi laborum veritatis quam voluptas quis odit, obcaecati nihil delectus impedit assumenda placeat illo magni officia similique sapiente!</p>
+		</div>
+		
+		<nav class="btn-nav">
+			<a href="/" class="info">INFO</a>
+			<a href="/cv.html" class="cv">CV</a>
+			<a href="work.html" class="work">WORK</a>
+		</nav>
+	</div>
+	
+<canvas id="canvas" resize></canvas>
+</body>
+</html>
+
+lorem

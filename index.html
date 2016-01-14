@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<title>Peter Humphrey, designer and technologist</title>
+<meta charset="UTF-8">
+<meta property="og:title" content="Peter Humphrey, designer and technologist" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://peterhumphrey.com" />
+<meta property="og:image" content="#" />
+<meta property="og:description" content="Peter Humphrey is a NYC-based interactive designer and technologist." />
+<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+<!--[if IE]>
+<link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<![endif]-->
+<script type="text/javascript" src="javascripts/paper-full.js"></script>
+<script type="text/paperscript" canvas="canvas">
+// Adapted from the following Processing example:
+// http://processing.org/learning/topics/follow3.html
+
+// The amount of points in the path:
+var points = 20;
+
+// The distance between the points:
+var length = 50;
+
+var path = new Path({
+	strokeColor: '#fff',
+	strokeWidth: 20,
+	strokeCap: 'round'
+});
+
+var start = view.center / [10, 1];
+for (var i = 0; i < points; i++)
+	path.add(start + new Point(i * length, 0));
+
+function onMouseMove(event) {
+	path.firstSegment.point = event.point;
+	for (var i = 0; i < points - 1; i++) {
+		var segment = path.segments[i];
+		var nextSegment = segment.next;
+		var vector = segment.point - nextSegment.point;
+		vector.length = length;
+		nextSegment.point = segment.point - vector;
+	}
+	path.smooth();
+}
+
+function onMouseDown(event) {
+	path.fullySelected = true;
+	path.strokeColor = '#0099ff';
+}
+
+function onMouseUp(event) {
+	path.fullySelected = false;
+	path.strokeColor = '#fff';
+}
+</script>
+</head>
+<body id="mainpage">
+	<div class="conatiner">
+		<div id="fade" class="name">Hi, my name is Peter Humphrey<span style="font-family: 'apercu_proregular', helvetica, arial, sans-serif"> is a NYC-based</br> interactive designer and technologist.</br>
+			</br>
+			I'm interested in interaction-rich web apps, integrated ecommerce systems, and interactive enviroments.</br>
+			</br>
+			°˖ ✧◝(○ ヮ ○)◜✧˖ °
+			</br>
+			</br>
+			<a href="mailto:peterberwind@gmail.com">Talk to me.</a>
+		</div>
+		<nav class="btn-nav">
+			<a href="/" class="info">INFO</a>
+			<a href="/cv.html" class="cv">CV</a>
+			<a href="work.html" class="work">WORK</a>
+		</nav>
+	</div>
+	
+<canvas id="canvas" resize></canvas>
+</body>
+</html>
